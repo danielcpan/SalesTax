@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - SalesTax",
+      "request": "launch",
+      "mainClass": "src.SalesTax",
+      "projectName": "SalesTax-LifeRay_da6f71b2"
+    }
+  ]
+}
