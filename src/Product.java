@@ -1,20 +1,29 @@
 package src;
 
 public class Product {
-
+  private int quantity;
   private String name;
   private Double price;
   private ProductType type;
   private Boolean isExempt;
   private Boolean isImported;
 
-  public Product(String name, Double price, ProductType type, Boolean isExempt, Boolean isImported) {
+  public Product(int quantity, String name, Double price, ProductType type, Boolean isExempt, Boolean isImported) {
+    this.quantity = quantity;
     this.name = name;
     this.price = price;
     this.type = type;
     this.isExempt = isExempt;
     this.isImported = isImported;
   }
+
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
+  }
+
+  public int getQuantity() {
+    return this.quantity;
+  }  
 
   public void setName(String name) {
     this.name = name;
@@ -48,7 +57,17 @@ public class Product {
     return this.isImported;
   }
 
-  public Double getPriceAfterTax() {
-    return 0.0;
+  public Double getSalesTax() {
+    double salesTax = this.price * (this.type.getTax() + this.getImportTax());
+    return Util.roundToNearest5Percent(salesTax);
   }
+
+  public Double getPriceAfterTax() {
+    double priceAfterTax = this.price + this.getSalesTax();
+    return Util.round(priceAfterTax);
+  }
+
+  public Double getImportTax() {
+    return isImported ? 0.05 : 0.0;
+  } 
 }
